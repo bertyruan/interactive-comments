@@ -4,56 +4,108 @@ import { ReactNode } from "react";
 import { ChildrenProp } from "../types/generic.types";
 import {
   CommentContext,
-  CommentsAndReplies,
-  CreateCommentProps,
+  CreateThreadProps,
   Comment,
-  CommentWithReplies,
+  Thread,
+  CreateReplyProps,
 } from "../types/comments.types";
-import { createId, getDateString } from "../helpers/helpers";
+import { createId, date } from "../helpers/helpers";
+
+const createNewComment = (username: string, text: string) => {
+  return {
+    id: createId(),
+    likes: 0,
+    username: username,
+    text: text,
+    date: date.now,
+  } as Comment;
+};
+
+const createNewReply = (post: CreateReplyProps) => {
+  const { username, text } = post;
+  return createNewComment(username, text);
+};
+
+const createNewThread = (post: CreateThreadProps) => {
+  const { username, text } = post;
+  const newThread = createNewComment(username, text);
+  return { ...newThread, replies: [] } as Thread;
+};
 
 export const CommentsContext = createContext<CommentContext>({
-  comments: { parents: {}, children: {} },
-  createComment: () => {},
-  editComment: () => {},
-  deleteComment: () => {},
+  threads: [],
+  createThread: () => {},
+  editThread: () => {},
+  deleteThread: () => {},
+  createReply: () => {},
+  editReply: () => {},
+  deleteReply: () => {},
 });
 
 export const CommentsProvider = ({ children }: ChildrenProp) => {
-  const [comments, setComments] = useState<CommentsAndReplies>({
-    parents: {},
-    children: {},
-  });
+  const [threads, setThreads] = useState<Thread[]>([]);
 
-  const createComment = (post: CreateCommentProps) => {
-    const { parent, username, text } = post;
-    if (!parent) {
-      const newComment: CommentWithReplies = {
-        id: createId(),
-        likes: 0,
-        replies: [],
-        username: username,
-        text: text,
-        date: getDateString(),
-      };
-      setComments((state) => {
-        const a = {
-          ...state,
-          parents: {
-            ...state.parents,
-            [newComment.id]: newComment,
-          },
-        };
-        console.log(a);
-        return a;
-      });
-    }
+  const createThread = (post: CreateThreadProps) => {
+    const newComment = createNewThread(post);
+    setThreads((state) => state.concat(newComment));
   };
 
-  const editComment = (text: string, comment: Comment) => {};
+  const editThread = (thread: Thread) => {
+    setThreads((state) =>
+      state.map((t) => {
+        if (t.id === thread.id) return { ...thread };
+        return t;
+      })
+    );
+  };
 
-  const deleteComment = (comment: Comment) => {};
+  const deleteThread = (thread: Thread) => {
+    setThreads((state) => state.filter((s) => s.id !== thread.id));
+  };
 
-  const value = { comments, createComment, editComment, deleteComment };
+  const createReply = (post: CreateReplyProps) => {
+    const newReply = createNewReply(post);
+    setThreads((state) =>
+      state.map((thread) => {
+        if (thread.id === post.parent.id) {
+          return { ...thread, replies: thread.replies.concat(newReply) };
+        }
+        return thread;
+      })
+    );
+  };
+
+  const editReply = (thread: Thread) => {
+    setThreads((state) =>
+      state.map((t) => {
+        if (t.id === thread.id) {
+          return { ...thread };
+        }
+        return thread;
+      })
+    );
+  };
+
+  const deleteReply = (thread: Thread) => {
+    setThreads((state) =>
+      state.map((t) => {
+        if (t.id === thread.id) {
+          return { ...thread };
+        }
+        return t;
+      })
+    );
+  };
+
+  const value = {
+    threads,
+    createThread,
+    editThread,
+    deleteThread,
+    createReply,
+    editReply,
+    deleteReply,
+  };
 
   return (
     <CommentsContext.Provider value={value}>

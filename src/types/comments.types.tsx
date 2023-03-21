@@ -6,30 +6,21 @@ export type Comment = {
   date: string;
 };
 
-export type CommentWithReplies = Comment & { replies: number[] };
+export type Thread = Comment & { replies: Comment[] };
 
-export type Comments = {
-  [id: string]: CommentWithReplies;
-};
-
-export type Replies = {
-  [id: string]: Comment & { parentId: number };
-};
-
-export type CommentsAndReplies = {
-  parents: Comments;
-  children: Replies;
-};
-
-export type CreateCommentProps = {
-  parent: Comment | null;
+export type CreateThreadProps = {
   username: string;
   text: string;
 };
 
+export type CreateReplyProps = CreateThreadProps & { parent: Comment };
+
 export type CommentContext = {
-  comments: CommentsAndReplies;
-  createComment: (post: CreateCommentProps) => void;
-  editComment: (text: string, comment: Comment) => void;
-  deleteComment: (comment: Comment) => void;
+  threads: Thread[];
+  createThread: (post: CreateThreadProps) => void;
+  editThread: (thread: Thread) => void;
+  deleteThread: (thread: Thread) => void;
+  createReply: (post: CreateReplyProps) => void;
+  editReply: (thread: Thread) => void;
+  deleteReply: (thread: Thread) => void;
 };

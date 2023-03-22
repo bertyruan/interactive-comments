@@ -7,7 +7,7 @@ export const date = (function () {
   const format = "DD/MM/YYYY HH:MM:ss";
 
   return {
-    now: dayjs().format(format),
+    now: () => dayjs().format(format),
     getTimeLapse: function (date: string) {
       return dayjs().to(dayjs(date, format));
     },

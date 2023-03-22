@@ -8,6 +8,7 @@ import {
   Comment,
   Thread,
   CreateReplyProps,
+  Prompt,
 } from "../types/comments.types";
 import { createId, date } from "../helpers/helpers";
 
@@ -17,7 +18,7 @@ const createNewComment = (username: string, text: string) => {
     likes: 0,
     username: username,
     text: text,
-    date: date.now,
+    date: date.now(),
   } as Comment;
 };
 
@@ -29,7 +30,7 @@ const createNewReply = (post: CreateReplyProps) => {
 const createNewThread = (post: CreateThreadProps) => {
   const { username, text } = post;
   const newThread = createNewComment(username, text);
-  return { ...newThread, replies: [] } as Thread;
+  return { ...newThread, replies: [], prompts: [] } as Thread;
 };
 
 export const CommentsContext = createContext<CommentContext>({
@@ -37,6 +38,7 @@ export const CommentsContext = createContext<CommentContext>({
   createThread: () => {},
   editThread: () => {},
   deleteThread: () => {},
+  promptReply: () => {},
   createReply: () => {},
   editReply: () => {},
   deleteReply: () => {},
@@ -61,6 +63,27 @@ export const CommentsProvider = ({ children }: ChildrenProp) => {
 
   const deleteThread = (thread: Thread) => {
     setThreads((state) => state.filter((s) => s.id !== thread.id));
+  };
+
+  const promptReply = (prompt: Prompt) => {
+    setThreads((state) =>
+      state.map((t) => {
+        if (t.id === prompt.thread.id) {
+          const threadPrompt = t.prompts.filter((p) => {
+            return (
+              prompt.thread.id === p.thread.id &&
+              prompt.reply?.id === p.reply?.id
+            );
+          });
+
+          if (!threadPrompt.length) {
+            const prompts = t.prompts.concat(prompt);
+            return { ...t, prompts };
+          }
+        }
+        return t;
+      })
+    );
   };
 
   const createReply = (post: CreateReplyProps) => {
@@ -102,6 +125,7 @@ export const CommentsProvider = ({ children }: ChildrenProp) => {
     createThread,
     editThread,
     deleteThread,
+    promptReply,
     createReply,
     editReply,
     deleteReply,

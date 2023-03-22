@@ -1,13 +1,13 @@
 import "./App.css";
-import { Comments } from "./components/comments/comments.component";
-import { CreateComment } from "./components/create-comment/create-comment.component";
+import { Threads } from "./components/threads/threads.component";
+import { CreateThread } from "./components/create-thread/create-thread.component";
 
 const App = () => {
   return (
     <div>
       <div>Interactive Comments</div>
-      <Comments></Comments>
-      <CreateComment></CreateComment>
+      <Threads></Threads>
+      <CreateThread></CreateThread>
     </div>
   );
 };

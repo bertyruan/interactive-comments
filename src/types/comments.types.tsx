@@ -6,7 +6,12 @@ export type Comment = {
   date: string;
 };
 
-export type Thread = Comment & { replies: Comment[] };
+export type Prompt = {
+  thread: Thread;
+  reply: Comment | null;
+};
+
+export type Thread = Comment & { replies: Comment[] } & { prompts: Prompt[] };
 
 export type CreateThreadProps = {
   username: string;
@@ -20,6 +25,7 @@ export type CommentContext = {
   createThread: (post: CreateThreadProps) => void;
   editThread: (thread: Thread) => void;
   deleteThread: (thread: Thread) => void;
+  promptReply: (prompt: Prompt) => void;
   createReply: (post: CreateReplyProps) => void;
   editReply: (thread: Thread) => void;
   deleteReply: (thread: Thread) => void;

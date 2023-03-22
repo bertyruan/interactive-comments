@@ -2,17 +2,16 @@ import { ChangeEvent, useContext, useState } from "react";
 import { CommentsContext } from "../../context/comments.context";
 import { CommentContext, CreateThreadProps } from "../../types/comments.types";
 
-export const CreateComment = () => {
-  const { createComment } = useContext<CommentContext>(CommentsContext);
+export const CreateThread = () => {
+  const { createThread } = useContext<CommentContext>(CommentsContext);
   const [userComment, setUserComment] = useState("");
 
   const createCommentCallback = () => {
     const commentProps: CreateThreadProps = {
-      parent: null,
       text: userComment,
       username: "bob the builder",
     };
-    createComment(commentProps);
+    createThread(commentProps);
     setUserComment(() => "");
   };
 

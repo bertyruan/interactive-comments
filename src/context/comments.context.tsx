@@ -9,6 +9,7 @@ import {
   Thread,
   CreateReplyProps,
   Prompt,
+  CreatePromptProps,
 } from "../types/comments.types";
 import { createId, date } from "../helpers/helpers";
 
@@ -27,6 +28,13 @@ const createNewReply = (post: CreateReplyProps) => {
   return createNewComment(username, text);
 };
 
+const createNewPrompt = (prompt: CreatePromptProps) => {
+  return {
+    ...prompt,
+    id: createId(),
+  };
+};
+
 const createNewThread = (post: CreateThreadProps) => {
   const { username, text } = post;
   const newThread = createNewComment(username, text);
@@ -39,6 +47,7 @@ export const CommentsContext = createContext<CommentContext>({
   editThread: () => {},
   deleteThread: () => {},
   promptReply: () => {},
+  deletePrompt: () => {},
   createReply: () => {},
   editReply: () => {},
   deleteReply: () => {},
@@ -65,32 +74,46 @@ export const CommentsProvider = ({ children }: ChildrenProp) => {
     setThreads((state) => state.filter((s) => s.id !== thread.id));
   };
 
-  const promptReply = (prompt: Prompt) => {
+  const promptReply = (prompt: CreatePromptProps) => {
     setThreads((state) =>
-      state.map((t) => {
-        if (t.id === prompt.thread.id) {
-          const threadPrompt = t.prompts.filter((p) => {
-            return (
-              prompt.thread.id === p.thread.id &&
-              prompt.reply?.id === p.reply?.id
-            );
-          });
-
-          if (!threadPrompt.length) {
-            const prompts = t.prompts.concat(prompt);
-            return { ...t, prompts };
+      state.map((thread) => {
+        if (thread.id === prompt.threadId) {
+          const promptExists =
+            thread.prompts.filter((p) => p.replyingToId === prompt.replyingToId)
+              .length > 0;
+          if (!promptExists) {
+            const newPrompt = createNewPrompt(prompt);
+            const prompts = thread.prompts.concat(newPrompt);
+            return { ...thread, prompts };
           }
         }
-        return t;
+        return thread;
       })
     );
+  };
+
+  const deletePrompt = (threadId: string, promptId: string) => {
+    setThreads((state) => {
+      return state.map((thread) => {
+        if (threadId === thread.id) {
+          const prompts = thread.prompts.filter(
+            (prompt) => prompt.id !== promptId
+          );
+          return {
+            ...thread,
+            prompts,
+          };
+        }
+        return thread;
+      });
+    });
   };
 
   const createReply = (post: CreateReplyProps) => {
     const newReply = createNewReply(post);
     setThreads((state) =>
       state.map((thread) => {
-        if (thread.id === post.parent.id) {
+        if (thread.id === post.parentId) {
           return { ...thread, replies: thread.replies.concat(newReply) };
         }
         return thread;
@@ -126,6 +149,7 @@ export const CommentsProvider = ({ children }: ChildrenProp) => {
     editThread,
     deleteThread,
     promptReply,
+    deletePrompt,
     createReply,
     editReply,
     deleteReply,

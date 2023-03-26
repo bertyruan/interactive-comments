@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { createContext } from "react";
-import { ReactNode } from "react";
 import { ChildrenProp } from "../types/generic.types";
 import {
   CommentContext,

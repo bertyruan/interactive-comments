@@ -1,4 +1,4 @@
-import { ChangeEvent, useContext, useState } from "react";
+import { useContext } from "react";
 import { CommentsContext } from "../../context/comments.context";
 import {
   CommentCallbacks,
@@ -6,7 +6,6 @@ import {
   Thread as ThreadType,
   Comment as CommentType,
 } from "../../types/comments.types";
-import { date } from "../../helpers/helpers";
 import { ReplyPrompt } from "../reply-prompt/reply-prompt.component";
 import { Comment } from "../comment/comment.component";
 

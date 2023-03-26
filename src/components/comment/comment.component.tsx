@@ -1,10 +1,7 @@
-import { ChangeEvent, useContext, useState } from "react";
-import { CommentsContext } from "../../context/comments.context";
-import { date } from "../../helpers/helpers";
+import { ChangeEvent, useState } from "react";
 import {
   Comment as CommentType,
   CommentCallbacks,
-  Thread,
 } from "../../types/comments.types";
 
 type CommentProps = {

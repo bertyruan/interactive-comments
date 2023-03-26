@@ -7,7 +7,7 @@ type ReplyPromptType = {
 };
 
 export const ReplyPrompt = ({ prompt, onSubmit }: ReplyPromptType) => {
-  const [text, setText] = useState(`@${prompt.replyingToUserName}`);
+  const [text, setText] = useState(`@${prompt.replyingToUserName} `);
 
   const textareaChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setText(event.target.value);

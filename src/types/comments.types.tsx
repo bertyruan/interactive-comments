@@ -23,6 +23,13 @@ export type CreatePromptProps = {
   replyingToId: string;
 };
 
+export type CommentCallbacks = {
+  finishUpdateCallback: (text: string) => void;
+  deleteCallback: () => void;
+  replyCallback: () => void;
+  likeCallback: (incr: number) => void;
+};
+
 export type CommentContext = {
   threads: Thread[];
   createThread: (post: CreateThreadProps) => void;
@@ -31,6 +38,6 @@ export type CommentContext = {
   promptReply: (prompt: CreatePromptProps) => void;
   deletePrompt: (threadId: string, promptId: string) => void;
   createReply: (post: CreateReplyProps) => void;
-  editReply: (thread: Thread) => void;
-  deleteReply: (thread: Thread) => void;
+  editReply: (thread: Thread, reply: Comment) => void;
+  deleteReply: (thread: Thread, replyId: string) => void;
 };

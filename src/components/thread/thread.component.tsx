@@ -1,34 +1,33 @@
 import { ChangeEvent, useContext, useState } from "react";
 import { CommentsContext } from "../../context/comments.context";
 import {
+  CommentCallbacks,
   CreateReplyProps,
   Thread as ThreadType,
+  Comment as CommentType,
 } from "../../types/comments.types";
 import { date } from "../../helpers/helpers";
 import { ReplyPrompt } from "../reply-prompt/reply-prompt.component";
+import { Comment } from "../comment/comment.component";
 
 type ThreadProps = {
   thread: ThreadType;
 };
 
 export const Thread = ({ thread }: ThreadProps) => {
-  const { editThread, deleteThread, promptReply, deletePrompt, createReply } =
-    useContext(CommentsContext);
-  const [isEditing, setIsEditing] = useState(false);
-  const [text, setText] = useState(thread.text);
+  const {
+    deletePrompt,
+    createReply,
+    editThread,
+    deleteThread,
+    promptReply,
+    editReply,
+    deleteReply,
+  } = useContext(CommentsContext);
 
-  const updateCallback = () => {
-    setIsEditing(true);
-  };
-
-  const finishUpdateCallback = () => {
-    setIsEditing(false);
-    const newThread = { ...thread, text, date: date.now() };
-    editThread(newThread);
-  };
-
-  const deleteThreadCallback = () => {
-    deleteThread(thread);
+  const createReplyCallback = (id: string, post: CreateReplyProps) => {
+    createReply(post);
+    deletePrompt(thread.id, id);
   };
 
   const replyCallback = () => {
@@ -39,33 +38,49 @@ export const Thread = ({ thread }: ThreadProps) => {
     });
   };
 
-  const createReplyCallback = (id: string, post: CreateReplyProps) => {
-    createReply(post);
-    deletePrompt(thread.id, id);
+  const threadCallbacks: CommentCallbacks = {
+    replyCallback,
+    finishUpdateCallback: (text: string) => {
+      const newThread = { ...thread, text };
+      editThread(newThread);
+    },
+    deleteCallback: () => {
+      deleteThread(thread);
+    },
+    likeCallback: (incr: number) => {
+      const newThread = { ...thread, likes: thread.likes + incr };
+      editThread(newThread);
+    },
   };
 
-  const onTextChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setText(event.target.value);
+  const replyCallbacks = function (reply: CommentType) {
+    const callbacks: CommentCallbacks = {
+      replyCallback,
+      finishUpdateCallback: (text: string) => {
+        const newReply = { ...reply, text };
+        editReply(thread, newReply);
+      },
+      deleteCallback: () => {
+        deleteReply(thread, reply.id);
+      },
+      likeCallback: (incr: number) => {
+        const newReply = { ...reply, likes: reply.likes + incr };
+        editReply(thread, newReply);
+      },
+    };
+    return callbacks;
   };
-
-  const editUI = <textarea onChange={onTextChange} value={text}></textarea>;
 
   return (
     <>
-      <div>{isEditing ? editUI : thread.text}</div>
-      <div>{thread.date}</div>
-      <div>{thread.username}</div>
-      <button onClick={updateCallback}>Edit</button>
-      <button onClick={deleteThreadCallback}>Delete</button>
-      <button onClick={replyCallback}>Reply</button>
-      {isEditing && <button onClick={finishUpdateCallback}>Update</button>}
-      {thread.replies.map((reply) => {
-        return (
-          <div key={reply.id}>
-            {reply.username}, {reply.text}, {reply.date}
-          </div>
-        );
-      })}
+      <Comment comment={thread} callbacks={threadCallbacks}></Comment>
+      {thread.replies.map((reply) => (
+        <Comment
+          key={reply.id}
+          callbacks={replyCallbacks(reply)}
+          comment={reply}
+        />
+      ))}
       {thread.prompts.map((prompt) => {
         return (
           <ReplyPrompt

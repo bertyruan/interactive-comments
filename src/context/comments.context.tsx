@@ -121,22 +121,31 @@ export const CommentsProvider = ({ children }: ChildrenProp) => {
     );
   };
 
-  const editReply = (thread: Thread) => {
+  const editReply = (thread: Thread, reply: Comment) => {
     setThreads((state) =>
       state.map((t) => {
         if (t.id === thread.id) {
-          return { ...thread };
+          const replies = t.replies.map((r) => {
+            if (r.id === reply.id) {
+              return { ...reply };
+            }
+            return r;
+          });
+          return { ...t, replies };
         }
-        return thread;
+        return t;
       })
     );
   };
 
-  const deleteReply = (thread: Thread) => {
+  const deleteReply = (thread: Thread, replyId: string) => {
     setThreads((state) =>
       state.map((t) => {
         if (t.id === thread.id) {
-          return { ...thread };
+          const replies = thread.replies.filter(
+            (reply) => reply.id !== replyId
+          );
+          return { ...thread, replies };
         }
         return t;
       })

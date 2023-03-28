@@ -4,13 +4,18 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { CommentsProvider } from "./context/comments.context";
+import { UsersProvider } from "./context/users.context";
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(
+  document.getElementById("root") as HTMLElement
+);
 root.render(
   <React.StrictMode>
-    <CommentsProvider>
-      <App />
-    </CommentsProvider>
+    <UsersProvider>
+      <CommentsProvider>
+        <App></App>
+      </CommentsProvider>
+    </UsersProvider>
   </React.StrictMode>
 );
 

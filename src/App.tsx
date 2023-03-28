@@ -1,15 +1,35 @@
 import "./App.css";
-import { Threads } from "./components/threads/threads.component";
-import { CreateThread } from "./components/create-thread/create-thread.component";
+import {
+  createBrowserRouter,
+  RouteObject,
+  RouterProvider,
+} from "react-router-dom";
+import { Forum } from "./components/forum/forum.component";
+import { ErrorPage } from "./routes/error-page.component";
+import { Home } from "./routes/home.component";
+import { Auth } from "./components/auth/auth.component";
+
+const routes: RouteObject[] = [
+  {
+    path: "/",
+    element: <Home />,
+    errorElement: <ErrorPage></ErrorPage>,
+    children: [
+      {
+        path: "/",
+        element: <Forum />,
+      },
+      {
+        path: "/auth",
+        element: <Auth></Auth>,
+      },
+    ],
+  },
+];
+const router = createBrowserRouter(routes);
 
 const App = () => {
-  return (
-    <div>
-      <div>Interactive Comments</div>
-      <Threads></Threads>
-      <CreateThread></CreateThread>
-    </div>
-  );
+  return <RouterProvider router={router}></RouterProvider>;
 };
 
 export default App;

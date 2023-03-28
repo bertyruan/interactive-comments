@@ -1,4 +1,5 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useContext, useState } from "react";
+import { UsersContext } from "../../context/users.context";
 import { CreateReplyProps, Prompt } from "../../types/comments.types";
 
 type ReplyPromptType = {
@@ -8,6 +9,7 @@ type ReplyPromptType = {
 
 export const ReplyPrompt = ({ prompt, onSubmit }: ReplyPromptType) => {
   const [text, setText] = useState(`@${prompt.replyingToUserName} `);
+  const { user } = useContext(UsersContext);
 
   const textareaChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setText(event.target.value);
@@ -15,7 +17,7 @@ export const ReplyPrompt = ({ prompt, onSubmit }: ReplyPromptType) => {
 
   const onClickCallback = () => {
     const post: CreateReplyProps = {
-      username: "bob the nany",
+      username: user.displayName,
       parentId: prompt.threadId,
       text,
     };

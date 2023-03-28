@@ -7,10 +7,9 @@ import {
   Comment,
   Thread,
   CreateReplyProps,
-  Prompt,
   CreatePromptProps,
 } from "../types/comments.types";
-import { createId, date } from "../helpers/helpers";
+import { createId, date } from "../utils/helpers.utils";
 
 const createNewComment = (username: string, text: string) => {
   return {

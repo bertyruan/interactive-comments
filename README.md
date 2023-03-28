@@ -6,6 +6,8 @@
 add netlify
 
 -->
+TODO:
+do login component and routing
 
 - What I've learned
 - don't over fit data. create a new type even if it differes by one property

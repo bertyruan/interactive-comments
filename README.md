@@ -7,7 +7,11 @@ add netlify
 
 -->
 TODO:
-do login component and routing
+users not showing up in database?
+do forums view and model
+do styled components styling
+do light testing
+do backend
 
 - What I've learned
 - don't over fit data. create a new type even if it differes by one property

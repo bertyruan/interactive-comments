@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Link, Outlet } from "react-router-dom";
-import { UsersContext } from "../context/users.context";
-import authUser from "../utils/firebase/auth.utils";
+import { UsersContext } from "../../context/users.context";
+import authUser from "../../utils/firebase/auth.utils";
 
 export const Home = () => {
   const { user } = useContext(UsersContext);

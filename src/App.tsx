@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 import { Forum } from "./components/forum/forum.component";
 import { ErrorPage } from "./routes/error-page.component";
-import { Home } from "./routes/home.component";
+import { Home } from "./routes/home/home.component";
 import { Auth } from "./components/auth/auth.component";
 
 const routes: RouteObject[] = [
@@ -17,6 +17,10 @@ const routes: RouteObject[] = [
     children: [
       {
         path: "/",
+        element: <Forum /> /* change to Forums later */,
+      },
+      {
+        path: "/:id",
         element: <Forum />,
       },
       {

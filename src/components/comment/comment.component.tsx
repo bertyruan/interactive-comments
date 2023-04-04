@@ -3,6 +3,7 @@ import {
   Comment as CommentType,
   CommentCallbacks,
 } from "../../types/comments.types";
+import "./comment.styles.scss";
 
 type CommentProps = {
   comment: CommentType;
@@ -35,7 +36,7 @@ export const Comment = ({ comment, callbacks }: CommentProps) => {
   const editUI = <textarea onChange={onTextChange} value={text}></textarea>;
 
   return (
-    <>
+    <div className="comment-container">
       <div>{isEditing ? editUI : comment.text}</div>
       <div>{comment.date}</div>
       <div>{comment.username}</div>
@@ -46,6 +47,6 @@ export const Comment = ({ comment, callbacks }: CommentProps) => {
       <button onClick={() => updateLikeCallback(1)}>Like</button>
       <button onClick={() => updateLikeCallback(-1)}>Dislike</button>
       {isEditing && <button onClick={finishUpdateHandler}>Update</button>}
-    </>
+    </div>
   );
 };

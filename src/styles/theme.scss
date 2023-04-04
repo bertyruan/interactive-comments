@@ -1,0 +1,19 @@
+$primary-color: #334253;
+$secondary-color: #f5f6fa;
+$third-color: #ffffff;
+$text-color: #67727e;
+$warning-color: #ed6368;
+
+$font-size: 1rem;
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$line-height-normal: 1.5rem;
+$font-family: "Rubik", "Open Sans", sans-serif;
+
+body {
+  background-color: $secondary-color;
+  font-weight: $font-weight-regular;
+  line-height: $line-height-normal;
+  font-family: $font-family;
+  font-size: $font-size;
+}

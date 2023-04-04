@@ -20,9 +20,13 @@ export const UsersProvider = ({ children }: ChildrenProp) => {
 
   const authChangeHandler = (user: FirebaseUser | null) => {
     if (user) {
-      console.log("authChange", user);
+      const displayName = user.displayName
+        ? user.displayName
+        : user.email
+        ? user.email.split("@")[0].toString()
+        : "";
       const currentUser: User = {
-        displayName: user.displayName || "",
+        displayName,
         email: user.email || "",
       };
       setUser(currentUser);
@@ -31,25 +35,8 @@ export const UsersProvider = ({ children }: ChildrenProp) => {
     }
   };
 
-  // useEffect(() => {
-  //   return authChange;
-  // }, []);
-
   useEffect(() => {
     const authChange = authUser.onAuthStateChangedListener(authChangeHandler);
-    const profileChange = usersDoc.onProfileChange(() => {
-      console.log("profile change", authUser.auth.currentUser?.email);
-      if (authUser.auth.currentUser?.displayName) {
-        setUser((u: User) => {
-          // console.log("setuser", u);
-          return {
-            ...u,
-            // email: authUser.auth.currentUser?.email || "",
-            displayName: authUser.auth.currentUser?.displayName || "",
-          };
-        });
-      }
-    });
     return authChange;
   }, []);
 

@@ -28,11 +28,9 @@ const firebaseConfig = {
 initializeApp(firebaseConfig);
 const auth = getAuth();
 
-const authUserWithEmailAndPassword = async (
-  email: string,
-  password: string
-) => {
-  return await signInWithEmailAndPassword(auth, email, password);
+const authUserWithEmailAndPassword = async (username: string) => {
+  const email = `${username}@bertydev.com`;
+  return await signInWithEmailAndPassword(auth, email, "helloworld");
 };
 
 const newUserWithEmailAndPassword = async (username: string) => {

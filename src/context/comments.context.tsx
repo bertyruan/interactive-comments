@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createContext } from "react";
 import { ChildrenProp } from "../types/generic.types";
 import {
@@ -53,6 +53,14 @@ export const CommentsContext = createContext<CommentContext>({
 
 export const CommentsProvider = ({ children }: ChildrenProp) => {
   const [threads, setThreads] = useState<Thread[]>([]);
+
+  useEffect(() => {
+    const post: CreateThreadProps = {
+      text: "hello world!",
+      username: "bob the builder",
+    };
+    createThread(post);
+  }, []);
 
   const createThread = (post: CreateThreadProps) => {
     const newComment = createNewThread(post);

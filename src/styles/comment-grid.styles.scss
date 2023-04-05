@@ -1,0 +1,31 @@
+@use "./theme.scss" as *;
+
+.grid-area-comment {
+  display: grid;
+  grid-template-areas:
+    "like profile buttons"
+    "like text text";
+
+  @include breakpoint($mobile) {
+    grid-template-areas:
+      "profile profile"
+      "text text"
+      "like buttons";
+  }
+
+  .grid-area-like {
+    grid-area: like;
+  }
+
+  .grid-area-profile {
+    grid-area: profile;
+  }
+
+  .grid-area-text {
+    grid-area: text;
+  }
+
+  .grid-area-buttons {
+    grid-area: buttons;
+  }
+}

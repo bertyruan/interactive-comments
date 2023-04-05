@@ -3,12 +3,17 @@ $secondary-color: #f5f6fa;
 $third-color: #ffffff;
 $text-color: #67727e;
 $warning-color: #ed6368;
+$border-color: hsla(0, 0%, 100%, 1);
 
+$font-color-primary: hsla(211, 10%, 45%, 1);
+$font-color-secondary: hsla(238, 40%, 52%, 1);
 $font-size: 1rem;
 $font-weight-regular: 400;
 $font-weight-medium: 500;
 $line-height-normal: 1.5rem;
 $font-family: "Rubik", "Open Sans", sans-serif;
+
+$flex-gap: 0.75rem;
 
 body {
   background-color: $secondary-color;
@@ -16,4 +21,19 @@ body {
   line-height: $line-height-normal;
   font-family: $font-family;
   font-size: $font-size;
+}
+
+$desktop: desktop;
+$mobile: mobile;
+
+@mixin breakpoint($point) {
+  @if $point == desktop {
+    @media (max-width: 1440px) {
+      @content;
+    }
+  } @else if $point == mobile {
+    @media (max-width: 600px) {
+      @content;
+    }
+  }
 }

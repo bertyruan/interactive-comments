@@ -1,0 +1,27 @@
+@use "./theme.scss" as *;
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-margin {
+  flex-basis: max(10%, 30px);
+}
+
+.flex-gap-normal {
+  gap: $flex-gap;
+}
+
+.font-color-primary {
+  color: $font-color-primary;
+}
+
+.font-color-secondary {
+  color: $font-color-secondary;
+}

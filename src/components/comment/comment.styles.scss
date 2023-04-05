@@ -13,22 +13,3 @@
   border: 0.1px solid $border-color;
   border-radius: 8px;
 }
-
-.like-container {
-  background-color: $secondary-color;
-  border-radius: 10px;
-  padding-block: 0.5rem;
-  padding-inline: 1rem;
-  width: fit-content;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 5px;
-
-  @include breakpoint($mobile) {
-    padding-block: 1rem;
-    padding-inline: 0.5rem;
-    flex-direction: row;
-  }
-}

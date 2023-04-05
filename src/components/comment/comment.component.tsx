@@ -4,6 +4,7 @@ import {
   CommentCallbacks,
 } from "../../types/comments.types";
 import "./comment.styles.scss";
+import { LikeComponent } from "../like/like.component";
 
 type CommentProps = {
   comment: CommentType;
@@ -29,10 +30,6 @@ export const Comment = ({ comment, callbacks }: CommentProps) => {
     finishUpdateCallback(text);
   };
 
-  const updateLikeCallback = (incr: number) => {
-    likeCallback(incr);
-  };
-
   const editUI = <textarea onChange={onTextChange} value={text}></textarea>;
 
   return (
@@ -48,11 +45,11 @@ export const Comment = ({ comment, callbacks }: CommentProps) => {
         <button onClick={replyCallback}>Reply</button>
         {isEditing && <button onClick={finishUpdateHandler}>Update</button>}
       </div>
-      <div className="like-container grid-area-like">
-        <button onClick={() => updateLikeCallback(1)}>Like</button>
-        <div>{comment.likes}</div>
-        <button onClick={() => updateLikeCallback(-1)}>Dislike</button>
-      </div>
+      <LikeComponent
+        className="grid-area-like"
+        callbacks={callbacks}
+        comment={comment}
+      ></LikeComponent>
     </div>
   );
 };

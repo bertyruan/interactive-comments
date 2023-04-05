@@ -1,0 +1,51 @@
+@use "../../styles/theme.scss" as *;
+
+$like-button-color-inactive: #c5c6ef;
+
+.like-container {
+  background-color: $secondary-color;
+  color: $button-text-color;
+  font-weight: $font-weight-medium;
+  border-radius: 10px;
+  padding-block: 8px;
+  padding-inline: 16px;
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  gap: 0.5em;
+
+  @include breakpoint($mobile) {
+    width: 90px;
+    padding-block: 6px;
+    padding-inline: 0;
+    justify-content: space-evenly;
+    flex-direction: row;
+  }
+}
+
+.like-container > * {
+  fill: $like-button-color-inactive;
+}
+
+.like-container > *:hover {
+  fill: $primary-color;
+
+  :disabled {
+    color: red;
+  }
+}
+
+.like-container > *:hover[disabled] {
+  fill: $like-button-color-inactive;
+}
+
+.like-container > :last-child {
+  margin-top: -4px;
+  margin-left: 0.5px;
+
+  @include breakpoint($mobile) {
+    margin-top: -6.5px;
+  }
+}

@@ -2,8 +2,8 @@ import "./like.styles.scss";
 import {
   Comment as CommentType,
   CommentCallbacks,
-} from "../../types/comments.types";
-import { Icon } from "../../assets/assets";
+} from "../../../types/comments.types";
+import { Icon } from "../../../assets/assets";
 
 type CommentProps = {
   comment: CommentType;

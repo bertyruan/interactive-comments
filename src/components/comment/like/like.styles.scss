@@ -1,4 +1,4 @@
-@use "../../styles/theme.scss" as *;
+@use "../../../styles/theme.scss" as *;
 
 $like-button-color-inactive: #c5c6ef;
 
@@ -10,6 +10,7 @@ $like-button-color-inactive: #c5c6ef;
   padding-block: 8px;
   padding-inline: 16px;
   width: fit-content;
+  height: fit-content;
   display: flex;
   flex-direction: column;
   justify-content: center;

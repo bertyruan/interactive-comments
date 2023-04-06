@@ -6,11 +6,14 @@
     "like profile buttons"
     "like text text";
 
+  grid-template-columns: 75px 1fr;
+
   @include breakpoint($mobile) {
     grid-template-areas:
       "profile profile"
       "text text"
       "like buttons";
+    grid-template-columns: 1fr;
   }
 
   .grid-area-like {

@@ -4,7 +4,9 @@ import {
   CommentCallbacks,
 } from "../../types/comments.types";
 import "./comment.styles.scss";
-import { LikeComponent } from "../like/like.component";
+import { LikeComponent } from "./like/like.component";
+import { Icon } from "../../assets/assets";
+import { CommentId } from "./comment-id/comment-id.component";
 
 type CommentProps = {
   comment: CommentType;
@@ -30,20 +32,45 @@ export const Comment = ({ comment, callbacks }: CommentProps) => {
     finishUpdateCallback(text);
   };
 
-  const editUI = <textarea onChange={onTextChange} value={text}></textarea>;
+  const editUI = (
+    <div className="flex-row flex-gap-normal">
+      <textarea
+        className="comment-edit-field "
+        onChange={onTextChange}
+        value={text}
+      ></textarea>
+      <button onClick={finishUpdateHandler}>Update</button>
+    </div>
+  );
 
   return (
     <div className="comment-container comment-border grid-area-comment font-color-primary">
-      <div className="grid-area-profile flex-row">
-        <div>{comment.username}</div>
-        <div>{comment.date}</div>
+      <CommentId className="grid-area-profile" comment={comment}></CommentId>
+      <div className="grid-area-text comment-text">
+        {isEditing ? editUI : comment.text}
       </div>
-      <div className="grid-area-text">{isEditing ? editUI : comment.text}</div>
-      <div className="grid-area-buttons flex-row">
-        <button onClick={updateCallback}>Edit</button>
-        <button onClick={deleteCallback}>Delete</button>
-        <button onClick={replyCallback}>Reply</button>
-        {isEditing && <button onClick={finishUpdateHandler}>Update</button>}
+      <div className="grid-area-buttons flex-row flex-gap-large buttons-container">
+        {!isEditing && (
+          <>
+            <button
+              className="flex-row flex-gap-small"
+              onClick={updateCallback}
+            >
+              {Icon.edit} Edit
+            </button>
+            <button
+              className="flex-row flex-gap-small"
+              onClick={deleteCallback}
+              id="warning"
+            >
+              {Icon.delete} Delete
+            </button>
+            <button className="flex-row flex-gap-small" onClick={replyCallback}>
+              {Icon.reply}
+              Reply
+            </button>
+          </>
+        )}
       </div>
       <LikeComponent
         className="grid-area-like"

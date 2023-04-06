@@ -11,6 +11,9 @@ export const date = (function () {
     getTimeLapse: function (date: string) {
       return dayjs().to(dayjs(date, format));
     },
+    getRelativeTime: function (date: string): string {
+      return dayjs(date, format).from(this.now());
+    },
     sortCallback: function (prev: string, curr: string) {
       const prevValue = dayjs(prev, format);
       const currValue = dayjs(curr, format);

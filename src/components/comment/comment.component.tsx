@@ -48,7 +48,7 @@ export const Comment = ({ comment, callbacks }: CommentProps) => {
   );
 
   return (
-    <div className="comment-container comment-border grid-area-comment font-color-primary">
+    <div className="comment-module comment-container comment-border grid-area-comment font-color-primary">
       <CommentId className="grid-area-profile" comment={comment}></CommentId>
       <div className="grid-area-text text-container">
         {isCurrentUser && isEditing ? (

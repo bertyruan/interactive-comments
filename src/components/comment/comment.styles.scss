@@ -3,11 +3,6 @@
 @use "../../styles/utility.scss" as *;
 
 .comment-container {
-  padding: 1rem 1.5rem;
-  max-width: 800px;
-  width: 100%;
-  background-color: $third-color;
-
   .text-container {
     padding-block: 0.7rem 0.75rem;
   }
@@ -21,17 +16,4 @@
 
     padding-right: 3rem;
   }
-}
-
-.comment-border {
-  border: 0.1px solid $border-color;
-  border-radius: 8px;
-}
-
-.comment-edit-border {
-  border: 0.1px solid $button-text-color;
-  border-radius: 8px;
-  padding-block: 0.75rem;
-  padding-inline: 1.5rem;
-  width: 100%;
 }

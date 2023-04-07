@@ -17,7 +17,7 @@ export const CommentId = ({ comment, className }: CommentIdProps) => {
     <div
       className={`${className} comment-id-container flex-row flex-gap-normal `}
     >
-      <img src={Avatar.amyrobson}></img>
+      <img className="avatar-normal" src={Avatar.amyrobson}></img>
       <div className="font-color-secondary flex-row">
         {comment.username}
         {user.displayName === comment.username && (

@@ -2,11 +2,6 @@
 @use "../../../styles/theme.scss" as *;
 
 .comment-id-container {
-  img {
-    width: 32px;
-    height: 32px;
-  }
-
   .username-self {
     background-color: $primary-color;
     color: $third-color;

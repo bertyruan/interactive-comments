@@ -42,3 +42,29 @@
     grid-area: buttons;
   }
 }
+
+.grid-area-create-thread {
+  grid-template-areas: "profile textarea button";
+  display: grid;
+  grid-template-columns: 50px 1fr;
+  gap: $flex-gap-large;
+
+  @include breakpoint($mobile) {
+    grid-template-areas:
+      "textarea textarea"
+      "profile button";
+    grid-template-columns: 1fr;
+  }
+
+  .grid-area-profile {
+    grid-area: profile;
+  }
+
+  .grid-area-textarea {
+    grid-area: textarea;
+  }
+
+  .grid-area-button {
+    grid-area: button;
+  }
+}

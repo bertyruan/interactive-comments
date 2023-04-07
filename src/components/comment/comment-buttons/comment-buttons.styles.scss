@@ -1,0 +1,14 @@
+@use "../../../styles/utility.scss";
+@use "../../../styles/theme.scss" as *;
+
+.buttons-container {
+  align-items: start;
+  button {
+    fill: $button-text-color;
+    color: $button-text-color;
+  }
+  .reply-icon {
+    margin-top: 2px;
+    margin-left: -2px;
+  }
+}

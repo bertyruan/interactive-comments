@@ -23,7 +23,7 @@ export const Home = () => {
   );
   const authButton = isLoggedIn ? logout : login;
   return (
-    <div className="flex-row">
+    <div className="flex-row home-container">
       <div className="flex-margin"></div>
       <main>
         <nav>

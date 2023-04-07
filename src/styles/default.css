@@ -82,3 +82,7 @@ button {
   cursor: pointer;
   background: none;
 }
+
+textarea {
+  resize: vertical;
+}

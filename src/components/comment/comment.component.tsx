@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useContext, useState } from "react";
 import {
   Comment as CommentType,
   CommentCallbacks,
@@ -7,6 +7,8 @@ import "./comment.styles.scss";
 import { LikeComponent } from "./like/like.component";
 import { Icon } from "../../assets/assets";
 import { CommentId } from "./comment-id/comment-id.component";
+import { CommentButtons } from "./comment-buttons/comment-buttons.component";
+import { UsersContext } from "../../context/users.context";
 
 type CommentProps = {
   comment: CommentType;
@@ -18,6 +20,9 @@ export const Comment = ({ comment, callbacks }: CommentProps) => {
     callbacks;
   const [isEditing, setIsEditing] = useState(false);
   const [text, setText] = useState(comment.text);
+  const { user } = useContext(UsersContext);
+
+  let isCurrentUser = user.displayName === comment.username;
 
   const onTextChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setText(event.target.value);
@@ -33,45 +38,43 @@ export const Comment = ({ comment, callbacks }: CommentProps) => {
   };
 
   const editUI = (
-    <div className="flex-row flex-gap-normal">
+    <div className="flex-column edit-ui-container flex-gap-large">
       <textarea
-        className="comment-edit-field "
+        className="comment-edit-border "
         onChange={onTextChange}
         value={text}
       ></textarea>
-      <button onClick={finishUpdateHandler}>Update</button>
     </div>
   );
 
   return (
     <div className="comment-container comment-border grid-area-comment font-color-primary">
       <CommentId className="grid-area-profile" comment={comment}></CommentId>
-      <div className="grid-area-text comment-text">
-        {isEditing ? editUI : comment.text}
-      </div>
-      <div className="grid-area-buttons flex-row flex-gap-large buttons-container">
-        {!isEditing && (
-          <>
-            <button
-              className="flex-row flex-gap-small"
-              onClick={updateCallback}
-            >
-              {Icon.edit} Edit
-            </button>
-            <button
-              className="flex-row flex-gap-small"
-              onClick={deleteCallback}
-              id="warning"
-            >
-              {Icon.delete} Delete
-            </button>
-            <button className="flex-row flex-gap-small" onClick={replyCallback}>
-              {Icon.reply}
-              Reply
-            </button>
-          </>
+      <div className="grid-area-text text-container">
+        {isCurrentUser && isEditing ? (
+          editUI
+        ) : (
+          <span className=" comment-text">{comment.text}</span>
         )}
       </div>
+
+      {isEditing ? (
+        <button
+          className="grid-area-update primary-button"
+          onClick={finishUpdateHandler}
+        >
+          Update
+        </button>
+      ) : (
+        <CommentButtons
+          className="grid-area-buttons"
+          updateCallback={updateCallback}
+          deleteCallback={deleteCallback}
+          replyCallback={replyCallback}
+          isCurrentUser={isCurrentUser}
+        />
+      )}
+
       <LikeComponent
         className="grid-area-like"
         callbacks={callbacks}

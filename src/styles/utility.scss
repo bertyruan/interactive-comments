@@ -15,6 +15,10 @@
   flex-basis: max(10%, 30px);
 }
 
+.flex-gap-xlarge {
+  gap: $flex-gap-xlarge;
+}
+
 .flex-gap-large {
   gap: $flex-gap-large;
 }
@@ -39,4 +43,19 @@
 #warning {
   color: $warning-color;
   fill: $warning-color;
+}
+
+.primary-button {
+  color: $third-color;
+  background-color: $button-text-color;
+  border-radius: 8px;
+  padding: 0.7rem 1.2rem;
+  line-height: 1.5rem;
+  text-transform: uppercase;
+  font-weight: $font-weight-medium;
+  width: fit-content;
+}
+
+.primary-button:hover {
+  background-color: hsla(238, 57%, 85%, 1);
 }

@@ -4,7 +4,8 @@
   display: grid;
   grid-template-areas:
     "like profile buttons"
-    "like text text";
+    "like text text"
+    "update update update";
 
   grid-template-columns: 75px 1fr;
 
@@ -22,6 +23,15 @@
 
   .grid-area-profile {
     grid-area: profile;
+  }
+
+  .grid-area-update {
+    grid-area: update;
+    margin-left: auto;
+
+    @include breakpoint($mobile) {
+      grid-area: buttons;
+    }
   }
 
   .grid-area-text {

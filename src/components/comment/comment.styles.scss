@@ -2,23 +2,23 @@
 @use "../../styles/comment-grid.styles.scss" as *;
 @use "../../styles/utility.scss" as *;
 
-.buttons-container {
-  align-items: start;
-  button {
-    fill: $button-text-color;
-    color: $button-text-color;
-  }
-}
-
 .comment-container {
-  padding: 1rem;
+  padding: 1rem 1.5rem;
   max-width: 800px;
   width: 100%;
   background-color: $third-color;
 
+  .text-container {
+    padding-block: 0.7rem 0.75rem;
+  }
+
+  .edit-ui-container {
+    align-items: end;
+  }
+
   .comment-text {
     word-wrap: break-word;
-    padding-block: 0.5rem 0.75rem;
+
     padding-right: 3rem;
   }
 }
@@ -28,7 +28,7 @@
   border-radius: 8px;
 }
 
-.comment-edit-field {
+.comment-edit-border {
   border: 0.1px solid $button-text-color;
   border-radius: 8px;
   padding-block: 0.75rem;

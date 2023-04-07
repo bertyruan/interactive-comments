@@ -15,6 +15,7 @@ $font-family: "Rubik", "Open Sans", sans-serif;
 
 $button-text-color: #5357b6;
 
+$flex-gap-xlarge: 2rem;
 $flex-gap-large: 1rem;
 $flex-gap: 0.75rem;
 $flex-gap-small: 0.5rem;
@@ -36,7 +37,7 @@ $mobile: mobile;
       @content;
     }
   } @else if $point == mobile {
-    @media (max-width: 600px) {
+    @media (max-width: 800px) {
       @content;
     }
   }

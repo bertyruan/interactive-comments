@@ -85,4 +85,5 @@ button {
 
 textarea {
   resize: vertical;
+  outline: none;
 }

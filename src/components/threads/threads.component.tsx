@@ -7,7 +7,7 @@ export const Threads = () => {
   const { threads } = useContext(CommentsContext);
 
   return (
-    <div className="flex-column flex-gap-normal">
+    <div className="flex-column flex-gap-large">
       {threads.map((thread) => {
         return <Thread key={thread.id} thread={thread}></Thread>;
       })}

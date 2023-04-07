@@ -4,10 +4,12 @@ import "./forum.styles.scss";
 
 export const Forum = () => {
   return (
-    <div className="flex-column flex-gap-normal">
+    <div className="flex-column flex-gap-large interactive-comments-container">
       <div>Interactive Comments</div>
       <Threads></Threads>
-      <CreateThread></CreateThread>
+      <span className="create-thread-wrapper">
+        <CreateThread></CreateThread>
+      </span>
     </div>
   );
 };

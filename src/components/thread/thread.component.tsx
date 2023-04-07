@@ -8,6 +8,7 @@ import {
 } from "../../types/comments.types";
 import { ReplyPrompt } from "../new-comment/reply-prompt/reply-prompt.component";
 import { Comment } from "../comment/comment.component";
+import "./thread.styles.scss";
 
 type ThreadProps = {
   thread: ThreadType;
@@ -71,24 +72,29 @@ export const Thread = ({ thread }: ThreadProps) => {
   };
 
   return (
-    <>
+    <div className="flex-column flex-gap-normal">
       <Comment comment={thread} callbacks={threadCallbacks}></Comment>
-      {thread.replies.map((reply) => (
-        <Comment
-          key={reply.id}
-          callbacks={replyCallbacks(reply)}
-          comment={reply}
-        />
-      ))}
-      {thread.prompts.map((prompt) => {
-        return (
-          <ReplyPrompt
-            key={prompt.id}
-            prompt={prompt}
-            onSubmit={createReplyCallback}
-          ></ReplyPrompt>
-        );
-      })}
-    </>
+      <div className="style-container">
+        <div className="horizontal-line"></div>
+        <div className="replies-container flex-column flex-gap-large">
+          {thread.replies.map((reply) => (
+            <Comment
+              key={reply.id}
+              callbacks={replyCallbacks(reply)}
+              comment={reply}
+            />
+          ))}
+          {thread.prompts.map((prompt) => {
+            return (
+              <ReplyPrompt
+                key={prompt.id}
+                prompt={prompt}
+                onSubmit={createReplyCallback}
+              ></ReplyPrompt>
+            );
+          })}
+        </div>
+      </div>
+    </div>
   );
 };

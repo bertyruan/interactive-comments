@@ -1,0 +1,16 @@
+@use "../../styles/utility.scss";
+
+.style-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: stretch;
+  .replies-container {
+    width: 100%;
+    padding-left: max(2%, 10px);
+  }
+}
+
+.horizontal-line {
+  border-right: 1px solid #e9ebf0;
+  width: max(1.9%, 9px);
+}

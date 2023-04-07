@@ -6,7 +6,7 @@ import {
   Thread as ThreadType,
   Comment as CommentType,
 } from "../../types/comments.types";
-import { ReplyPrompt } from "../reply-prompt/reply-prompt.component";
+import { ReplyPrompt } from "../new-comment/reply-prompt/reply-prompt.component";
 import { Comment } from "../comment/comment.component";
 
 type ThreadProps = {

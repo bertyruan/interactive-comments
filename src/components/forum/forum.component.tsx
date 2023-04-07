@@ -1,4 +1,4 @@
-import { CreateThread } from "../create-thread/create-thread.component";
+import { CreateThread } from "../new-comment/create-thread/create-thread.component";
 import { Threads } from "../threads/threads.component";
 import "./forum.styles.scss";
 

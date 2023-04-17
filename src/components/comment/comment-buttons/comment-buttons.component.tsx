@@ -1,7 +1,8 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Icon } from "../../../assets/assets";
 import "./comment-buttons.styles.scss";
 import { UsersContext } from "../../../context/users.context";
+import { ConfirmDeletePopup } from "../../delete-comment/delete-comment";
 
 type CommentButtonsProp = {
   updateCallback: () => void;
@@ -18,7 +19,19 @@ export const CommentButtons = ({
   isCurrentUser,
   className,
 }: CommentButtonsProp) => {
-  const { user } = useContext(UsersContext);
+  const [showModal, setShowModal] = useState(false);
+
+  const onClickDelete = () => {
+    setShowModal(() => true);
+  };
+
+  const cancelModal = () => {
+    setShowModal(() => false);
+  };
+
+  const confirmDeleteCallback = () => {
+    deleteCallback();
+  };
 
   return (
     <div className={`${className} flex-row flex-gap-large buttons-container`}>
@@ -26,7 +39,7 @@ export const CommentButtons = ({
         <>
           <button
             className="flex-row flex-gap-small"
-            onClick={deleteCallback}
+            onClick={onClickDelete}
             id="warning"
           >
             {Icon.delete} Delete
@@ -40,6 +53,12 @@ export const CommentButtons = ({
           <span className="reply-icon">{Icon.reply}</span>
           Reply
         </button>
+      )}
+      {showModal && (
+        <ConfirmDeletePopup
+          cancel={cancelModal}
+          delete={confirmDeleteCallback}
+        />
       )}
     </div>
   );

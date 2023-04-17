@@ -1,4 +1,4 @@
-import { ChangeEvent, useContext, useState } from "react";
+import { useContext } from "react";
 import { UsersContext } from "../../../context/users.context";
 import { CreateReplyProps, Prompt } from "../../../types/comments.types";
 import { NewComment } from "../new-comment.component";

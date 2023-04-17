@@ -5,7 +5,6 @@ import {
 } from "../../types/comments.types";
 import "./comment.styles.scss";
 import { LikeComponent } from "./like/like.component";
-import { Icon } from "../../assets/assets";
 import { CommentId } from "./comment-id/comment-id.component";
 import { CommentButtons } from "./comment-buttons/comment-buttons.component";
 import { UsersContext } from "../../context/users.context";
@@ -16,8 +15,7 @@ type CommentProps = {
 };
 
 export const Comment = ({ comment, callbacks }: CommentProps) => {
-  const { finishUpdateCallback, deleteCallback, replyCallback, likeCallback } =
-    callbacks;
+  const { finishUpdateCallback, deleteCallback, replyCallback } = callbacks;
   const [isEditing, setIsEditing] = useState(false);
   const [text, setText] = useState(comment.text);
   const { user } = useContext(UsersContext);

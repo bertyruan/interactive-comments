@@ -3,7 +3,6 @@ import { User, UserContext } from "../types/users.types";
 import { ChildrenProp } from "../types/generic.types";
 import authUser from "../utils/firebase/auth.utils";
 import { User as FirebaseUser } from "firebase/auth";
-import usersDoc from "../utils/firebase/users.utils";
 
 const getDefaultUser: () => User = () => ({
   displayName: "",

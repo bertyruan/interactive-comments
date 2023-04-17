@@ -22,7 +22,11 @@ export const NewComment = ({ createComment, type }: NewCommentProp) => {
   return (
     <div className="comment-border comment-module grid-area-create-thread create-thread-container">
       <div className="grid-area-profile">
-        <img className="avatar-big" src={Avatar.amyrobson}></img>
+        <img
+          alt={"amy robson"}
+          className="avatar-big"
+          src={Avatar.amyrobson}
+        ></img>
       </div>
       <textarea
         className="comment-edit-border grid-area-textarea"

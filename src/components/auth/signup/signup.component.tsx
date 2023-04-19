@@ -21,9 +21,7 @@ export const Signup = () => {
       authUser.newUserWithEmailAndPassword(username).then(() => {
         setFormField(defaultFormFields);
       });
-    } catch {
-      console.log("lol");
-    }
+    } catch {}
   };
 
   return (

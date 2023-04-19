@@ -3,12 +3,17 @@ import { Avatar } from "../../assets/assets";
 import "./new-comment.styles.scss";
 
 type NewCommentProp = {
+  defaultText: string;
   createComment: (userComment: string) => void;
   type: "Reply" | "Send";
 };
 
-export const NewComment = ({ createComment, type }: NewCommentProp) => {
-  const [userComment, setUserComment] = useState("");
+export const NewComment = ({
+  defaultText,
+  createComment,
+  type,
+}: NewCommentProp) => {
+  const [userComment, setUserComment] = useState(defaultText);
 
   const setUserCommentHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setUserComment(() => event.target.value);

@@ -45,15 +45,25 @@ export const Comment = ({ comment, callbacks }: CommentProps) => {
     </div>
   );
 
+  const commentText = () => {
+    const text = comment.text.split(" ");
+    if (text[0][0] === "@") {
+      console.log(text[0]);
+      const username = text.splice(0, 1);
+      return (
+        <span className="comment-text">
+          <span className="at-symbol-refer">{username}</span> {text}
+        </span>
+      );
+    }
+    return <span className="comment-text">{text}</span>;
+  };
+
   return (
     <div className="comment-module comment-container comment-border grid-area-comment font-color-primary">
       <CommentId className="grid-area-profile" comment={comment}></CommentId>
       <div className="grid-area-text text-container">
-        {isCurrentUser && isEditing ? (
-          editUI
-        ) : (
-          <span className=" comment-text">{comment.text}</span>
-        )}
+        {isCurrentUser && isEditing ? editUI : commentText()}
       </div>
 
       {isEditing ? (

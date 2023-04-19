@@ -4,7 +4,7 @@ import plugin from "dayjs/plugin/relativeTime";
 dayjs.extend(plugin);
 
 export const date = (function () {
-  const format = "DD/MM/YYYY HH:MM:ss";
+  const format = "MM/DD/YYYY HH:MM:ss";
 
   return {
     now: () => dayjs().format(format),

@@ -1,7 +1,20 @@
+@use "../../styles/utility.scss";
+@use "../../styles/theme.scss" as *;
+
 main {
+  padding-top: 16px;
   width: 100%;
+  max-width: $desktop-width;
+
+  @include breakpoint($mobile) {
+    max-width: $mobile-width;
+  }
 }
 
 .home-container {
   margin-block: 0 5rem;
+}
+
+.nav-container {
+  justify-content: space-between;
 }

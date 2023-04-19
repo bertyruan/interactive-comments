@@ -62,7 +62,7 @@ export const CommentsProvider = ({ children }: ChildrenProp) => {
   useEffect(() => {
     const post: CreateThreadProps = {
       text: "hello world!",
-      username: "bob the builder",
+      username: "bob_the_builder",
     };
     createThread(post);
   }, []);

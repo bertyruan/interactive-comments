@@ -10,16 +10,22 @@ type ReplyPromptType = {
 
 export const ReplyPrompt = ({ prompt, onSubmit }: ReplyPromptType) => {
   const { user } = useContext(UsersContext);
+  const defaultText = `@${prompt.replyingToUserName}  `;
 
   const onClickCallback = (userComment: string) => {
-    const text = `@${prompt.replyingToUserName} ${userComment}`;
     const post: CreateReplyProps = {
       username: user.displayName,
       parentId: prompt.threadId,
-      text,
+      text: userComment,
     };
     onSubmit(prompt.id, post);
   };
 
-  return <NewComment type="Reply" createComment={onClickCallback}></NewComment>;
+  return (
+    <NewComment
+      type="Reply"
+      createComment={onClickCallback}
+      defaultText={defaultText}
+    ></NewComment>
+  );
 };

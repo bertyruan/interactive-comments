@@ -1,9 +1,6 @@
 @use "../../styles/utility.scss";
+@use "../../styles/theme.scss" as *;
 
 .create-thread-wrapper {
   margin-top: 8px;
-}
-
-.interactive-comments-container {
-  max-width: 60vw;
 }

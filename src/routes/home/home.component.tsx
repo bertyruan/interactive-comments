@@ -4,6 +4,7 @@ import { UsersContext } from "../../context/users.context";
 import authUser from "../../utils/firebase/auth.utils";
 import "../../styles/utility.scss";
 import "./home.styles.scss";
+import { Avatar } from "../../assets/assets";
 
 export const Home = () => {
   const { user } = useContext(UsersContext);
@@ -13,21 +14,38 @@ export const Home = () => {
   };
 
   const isLoggedIn = user.displayName !== "";
-  console.log(isLoggedIn, user);
-  const login = <Link to={`/auth`}>Log in</Link>;
-  const logout = (
-    <>
-      <span>{user.displayName}</span>
-      <button onClick={logoutHandler}>Log out</button>
-    </>
+
+  const login = (
+    <Link className="button" to={`/auth`}>
+      Log in
+    </Link>
   );
+
+  const logout = (
+    <div className="logout-container flex-row flex-gap-small">
+      <img
+        alt={"amy robson"}
+        className="avatar-normal"
+        src={Avatar.amyrobson}
+      ></img>
+      <span className="username font-color-secondary">{user.displayName}</span>
+      <button className="button" onClick={logoutHandler}>
+        Log out
+      </button>
+    </div>
+  );
+
   const authButton = isLoggedIn ? logout : login;
+
   return (
     <div className="flex-row home-container">
       <div className="flex-margin"></div>
       <main>
-        <nav>
-          <Link to={`/`}>Home</Link>...........{authButton}
+        <nav className="nav-container flex-row">
+          <Link className="button" to={`/`}>
+            Home
+          </Link>
+          <div>{authButton}</div>
         </nav>
         <br />
         <div>

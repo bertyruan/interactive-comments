@@ -22,6 +22,10 @@ export const CreateThread = () => {
   };
 
   return (
-    <NewComment type="Send" createComment={createCommentCallback}></NewComment>
+    <NewComment
+      type="Send"
+      createComment={createCommentCallback}
+      defaultText=""
+    ></NewComment>
   );
 };

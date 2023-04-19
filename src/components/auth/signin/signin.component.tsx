@@ -1,5 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import authUser from "../../../utils/firebase/auth.utils";
+import { redirect, useNavigate } from "react-router-dom";
 
 const defaultFormFields = {
   username: "",
@@ -8,6 +9,7 @@ const defaultFormFields = {
 export const Signin = () => {
   const [formField, setFormField] = useState(defaultFormFields);
   const { username } = formField;
+  const navigate = useNavigate();
 
   const onChangeHandler = ({ target }: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = target;
@@ -17,8 +19,10 @@ export const Signin = () => {
   const onSubmitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      authUser.authUserWithEmailAndPassword(username);
-      clearFields();
+      authUser.authUserWithEmailAndPassword(username).then(() => {
+        clearFields();
+        navigate("/");
+      });
     } catch {}
   };
 

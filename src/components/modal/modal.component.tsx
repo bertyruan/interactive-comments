@@ -5,7 +5,7 @@ import "./modal.styles.scss";
 
 export function Modal() {
   const { modal, confirmModal } = useContext(CommentsContext);
-  console.log(modal);
+
   const cancelCallback = () => {
     confirmModal(false);
   };

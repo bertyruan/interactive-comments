@@ -12,9 +12,6 @@ import { Modal } from "./components/modal/modal.component";
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
-const modal = ReactDOM.createRoot(
-  document.getElementById("modal") as HTMLElement
-);
 
 root.render(
   <React.StrictMode>

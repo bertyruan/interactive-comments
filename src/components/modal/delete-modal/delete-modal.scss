@@ -1,0 +1,48 @@
+@use "../../../styles/theme.scss" as *;
+
+.m-delete {
+  /* height: 250px; */
+  max-width: 370px;
+  width: 40vw;
+  min-width: 340px;
+  border-radius: 8px;
+  padding: 32px;
+  background-color: $third-color;
+}
+
+.delete-title {
+  font-weight: $font-weight-medium;
+}
+
+.delete-desc {
+  line-height: 1.5;
+  color: $text-color;
+}
+
+.delete-cta {
+  --file-gap: 16px;
+  button {
+    color: $third-color;
+  }
+
+  .button-cancel,
+  .button-confirm {
+    padding-inline: min(3vw, 1.5rem);
+  }
+
+  .button-confirm {
+    background-color: $warning-color;
+  }
+
+  .button-confirm:hover {
+    background-color: $warning-color-lite;
+  }
+
+  .button-cancel {
+    background-color: $text-color;
+  }
+
+  .button-cancel:hover {
+    background-color: #a1aab4;
+  }
+}

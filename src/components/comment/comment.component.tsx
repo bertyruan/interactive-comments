@@ -58,7 +58,7 @@ export const Comment = ({ comment, callbacks }: CommentProps) => {
 
       {isEditing ? (
         <button
-          className="grid-area-update primary-button"
+          className="grid-area-update button primary-button"
           onClick={finishUpdateHandler}
         >
           Update

@@ -1,5 +1,13 @@
 @use "./theme.scss" as *;
 
+.stack > * + * {
+  margin-top: var(--stack-gap, 1em);
+}
+
+.file > * + * {
+  margin-left: var(--file-gap, 1em);
+}
+
 .flex-row {
   display: flex;
   flex-direction: row;
@@ -45,14 +53,17 @@
   fill: $warning-color;
 }
 
-.primary-button {
-  color: $third-color;
-  background-color: $button-text-color;
+.button {
   border-radius: 8px;
   padding: 0.7rem 1.2rem;
   line-height: 1.5rem;
   text-transform: uppercase;
   font-weight: $font-weight-medium;
+}
+
+.primary-button {
+  color: $third-color;
+  background-color: $button-text-color;
   width: 100px;
   height: fit-content;
 }

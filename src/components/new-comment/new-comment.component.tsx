@@ -35,7 +35,7 @@ export const NewComment = ({ createComment, type }: NewCommentProp) => {
         onChange={setUserCommentHandler}
       ></textarea>
       <button
-        className="primary-button grid-area-button"
+        className="button primary-button grid-area-button"
         onClick={() => createCommentCallback(userComment)}
       >
         {type}

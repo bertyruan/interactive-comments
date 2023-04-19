@@ -1,3 +1,5 @@
+import { Modal } from "./modal.types";
+
 export type Comment = {
   id: string;
   username: string;
@@ -32,6 +34,9 @@ export type CommentCallbacks = {
 
 export type CommentContext = {
   threads: Thread[];
+  modal: Modal;
+  confirmModal: (del: boolean) => void;
+  showModal: (callback: () => void) => void;
   createThread: (post: CreateThreadProps) => void;
   editThread: (thread: Thread) => void;
   deleteThread: (thread: Thread) => void;

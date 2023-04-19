@@ -7,15 +7,21 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { CommentsProvider } from "./context/comments.context";
 import { UsersProvider } from "./context/users.context";
+import { Modal } from "./components/modal/modal.component";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
+const modal = ReactDOM.createRoot(
+  document.getElementById("modal") as HTMLElement
+);
+
 root.render(
   <React.StrictMode>
     <UsersProvider>
       <CommentsProvider>
         <App></App>
+        <Modal></Modal>
       </CommentsProvider>
     </UsersProvider>
   </React.StrictMode>

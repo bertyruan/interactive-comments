@@ -1,8 +1,7 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Icon } from "../../../assets/assets";
+import { CommentsContext } from "../../../context/comments.context";
 import "./comment-buttons.styles.scss";
-import { UsersContext } from "../../../context/users.context";
-import { ConfirmDeletePopup } from "../../delete-comment/delete-comment";
 
 type CommentButtonsProp = {
   updateCallback: () => void;
@@ -19,18 +18,10 @@ export const CommentButtons = ({
   isCurrentUser,
   className,
 }: CommentButtonsProp) => {
-  const [showModal, setShowModal] = useState(false);
+  const { showModal } = useContext(CommentsContext);
 
   const onClickDelete = () => {
-    setShowModal(() => true);
-  };
-
-  const cancelModal = () => {
-    setShowModal(() => false);
-  };
-
-  const confirmDeleteCallback = () => {
-    deleteCallback();
+    showModal(deleteCallback);
   };
 
   return (
@@ -53,12 +44,6 @@ export const CommentButtons = ({
           <span className="reply-icon">{Icon.reply}</span>
           Reply
         </button>
-      )}
-      {showModal && (
-        <ConfirmDeletePopup
-          cancel={cancelModal}
-          delete={confirmDeleteCallback}
-        />
       )}
     </div>
   );

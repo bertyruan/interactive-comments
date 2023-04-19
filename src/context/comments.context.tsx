@@ -10,6 +10,7 @@ import {
   CreatePromptProps,
 } from "../types/comments.types";
 import { createId, date } from "../utils/helpers.utils";
+import { DefaultModal, Modal } from "../types/modal.types";
 
 const createNewComment = (username: string, text: string) => {
   return {
@@ -41,6 +42,9 @@ const createNewThread = (post: CreateThreadProps) => {
 
 export const CommentsContext = createContext<CommentContext>({
   threads: [],
+  modal: { ...DefaultModal },
+  showModal: () => {},
+  confirmModal: () => {},
   createThread: () => {},
   editThread: () => {},
   deleteThread: () => {},
@@ -53,6 +57,7 @@ export const CommentsContext = createContext<CommentContext>({
 
 export const CommentsProvider = ({ children }: ChildrenProp) => {
   const [threads, setThreads] = useState<Thread[]>([]);
+  const [modal, setModal] = useState<Modal>({ ...DefaultModal });
 
   useEffect(() => {
     const post: CreateThreadProps = {
@@ -62,10 +67,27 @@ export const CommentsProvider = ({ children }: ChildrenProp) => {
     createThread(post);
   }, []);
 
-  const createThread = (post: CreateThreadProps) => {
+  const confirmModal = (del: boolean) => {
+    if (del) {
+      modal.callback();
+    }
+    setModal(() => ({ ...DefaultModal }));
+  };
+
+  const showModal = (callback: () => void) => {
+    setModal(
+      () =>
+        ({
+          show: true,
+          callback,
+        } as Modal)
+    );
+  };
+
+  function createThread(post: CreateThreadProps) {
     const newComment = createNewThread(post);
     setThreads((state) => state.concat(newComment));
-  };
+  }
 
   const editThread = (thread: Thread) => {
     setThreads((state) =>
@@ -160,6 +182,9 @@ export const CommentsProvider = ({ children }: ChildrenProp) => {
 
   const value = {
     threads,
+    modal,
+    confirmModal,
+    showModal,
     createThread,
     editThread,
     deleteThread,

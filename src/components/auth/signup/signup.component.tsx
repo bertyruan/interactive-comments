@@ -1,5 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import authUser from "../../../utils/firebase/auth.utils";
+import { AuthForm } from "../auth-form/auth-form.component";
 
 const defaultFormFields = {
   username: "",
@@ -25,15 +26,11 @@ export const Signup = () => {
   };
 
   return (
-    <form onSubmit={onSubmitHandler}>
-      <label>Username</label>
-      <input
-        type="text"
-        name="username"
-        value={username}
-        onChange={onChangeHandler}
-      ></input>
-      <button type="submit">Signup</button>
-    </form>
+    <AuthForm
+      onChangeCallback={onChangeHandler}
+      onSubmitCallback={onSubmitHandler}
+      type="Signup"
+      username={username}
+    ></AuthForm>
   );
 };

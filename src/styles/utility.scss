@@ -14,6 +14,10 @@
   align-items: center;
 }
 
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
 .flex-column {
   display: flex;
   flex-direction: column;
@@ -39,6 +43,10 @@
   gap: $flex-gap-small;
 }
 
+.flex-align-right {
+  align-items: end;
+}
+
 .font-color-primary {
   color: $font-color-primary;
 }
@@ -53,12 +61,16 @@
   fill: $warning-color;
 }
 
-.button {
-  border-radius: 8px;
-  padding: 0.7rem 1.2rem;
+.button-text {
   line-height: 1.5rem;
   text-transform: uppercase;
   font-weight: $font-weight-medium;
+}
+
+.button {
+  @extend .button-text;
+  border-radius: 8px;
+  padding: 0.7rem 1.2rem;
   text-decoration: none;
 }
 

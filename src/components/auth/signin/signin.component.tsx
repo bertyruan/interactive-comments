@@ -1,6 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import authUser from "../../../utils/firebase/auth.utils";
 import { useNavigate } from "react-router-dom";
+import { AuthForm } from "../auth-form/auth-form.component";
 
 const defaultFormFields = {
   username: "",
@@ -31,17 +32,11 @@ export const Signin = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={onSubmitHandler}>
-        <label>Username</label>
-        <input
-          type="text"
-          name="username"
-          value={username}
-          onChange={onChangeHandler}
-        ></input>
-        <button type="submit">Login</button>
-      </form>
-    </div>
+    <AuthForm
+      onChangeCallback={onChangeHandler}
+      onSubmitCallback={onSubmitHandler}
+      type="Login"
+      username={username}
+    ></AuthForm>
   );
 };
